@@ -1,0 +1,148 @@
+
+
+
+create server folder
+within server directory
+
+RUN:
+npm init
+nnpm install --save-dev @types/node     
+nnpm install --save-dev typescript
+
+
+1.....//create file( index.ts)
+
+2.....in package.json---change name of main ---index.js to index.ts
+
+  // "main": "index.js",index.ts
+
+  3....chnage scripts in package.json
+    /*  "test": "echo \"Error: no test specified\" && exit 1"  */
+.............................
+      "scripts": {
+"dev":"npx ts-node index.ts",
+"seed":"npx ts-node seed-database.ts"
+  },(seed database is going to seed our mongodb )
+  ...........................
+
+
+ npm install express mongodb cors @langchain/google-genai @langchain/core @langchain/langgraph @langchain/langgraph-checkpoint-mongodb
+
+ .............................
+
+ npm install express mongodb cors @langchain/google-genai @langchain/core @langchain/langgraph @langchain/langgraph-checkpoint-mongodb @langchain/mongodb dotenv langchain zod @types/cors @types/express ts-node
+
+ @langchain/google-genai  --for creating vector embeddings from text using gemini
+ @langchain/core     --(for importing packages/methods for various thngd)
+ @langchain/langgraph           --
+ @langchain/langgraph-checkpoint-mongodb  --(for saving conversation state)
+ @langchain/mongodb       --
+ langchain           --
+ zod         --Its a Schema validation Library
+ dotenv             --for working with secret variables
+ @types/cors        --as we are working in typescript
+  @types/express     --
+  ts-node           --for working with node in typescript
+
+
+
+In client directory   ====   npm i react-icons
+
+
+
+
+
+
+
+
+
+  ......................Connection string (shared by both apps):
+
+mongodb+srv://username:password@cluster0.xxxxx.mongodb.net/
+
+Project 1 (Student Portal App)
+mongoose.connect(
+  "mongodb+srv://username:password@cluster0.xxxxx.mongodb.net/student_portal"
+);
+
+
+Project 2 (E-Commerce App)
+mongoose.connect(
+  "mongodb+srv://username:password@cluster0.xxxxx.mongodb.net/ecommerce"
+);
+
+
+👉 Both are in the same cluster, but data is separated by database name.
+................................
+
+
+
+//mongodb+srv://mern-auth:<db_password>@cluster0.yylszej.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+Project 1: MERN Auth
+mongoose.connect(
+  "mongodb+srv://mern-auth:<db_password>@cluster0.yylszej.mongodb.net/mernAuthDB?retryWrites=true&w=majority&appName=Cluster0"
+);
+Project 2: E-Commerce AI Agent
+mongoose.connect(
+  "mongodb+srv://mern-auth:<db_password>@cluster0.yylszej.mongodb.net/ecommerceAI?retryWrites=true&w=majority&appName=Cluster0"
+);
+
+...........................................
+TO GET MONODB_ATLAS_URI
+DATABASE ACCESS--->GET <db_password>
+
+
+TO GET GOOGLE API KEY
+
+GO TO  ==>        http://console.cloud.google.com/
+..................................
+
+in server directory...run  
+    npm run (for seeding database)
+.......................... 
+
+then to run agent.ts
+   npm run dev
+
+ ....................before scripts in packg .json.........................
+
+   "scripts": {
+    "dev": "npx ts-node index.ts",
+   
+    "seed":"node --loader ts-node/esm seed-database.ts"
+   
+  },
+  .......................after...................
+
+  "scripts": {
+  "dev": "node --loader ts-node/esm index.ts",
+  "seed": "node --loader ts-node/esm seed-database.ts"
+}
+
+
+after npm run dev..server listening..then open another terminal and run command:
+curl -X POST -H "Content-Type:application/json" \ -d '{"message":"Do you have any dining tables?"}' \  http://localhost:8000/chat
+
+
+....................................................bcz of errors in agent.ts..............
+Solution 4: Use a bundler like tsx (Easiest)
+Install tsx:
+
+bash
+npm install --save-dev tsx
+Change your scripts:
+
+json
+"scripts": {
+  "dev": "tsx index.ts",
+  "seed": "tsx seed-database.ts"
+}
+.................................................
+Recommended Approach (Solution 1):
+Use .js extension in your imports:
+
+typescript
+// index.ts
+import { callAgent } from "./agent.js";
+
+// Even though the file is agent.ts, import as agent.js
