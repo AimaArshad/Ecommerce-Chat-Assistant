@@ -58,7 +58,7 @@ In client directory   ====   npm i react-icons
 
   ......................Connection string (shared by both apps):
 
-mongodb+srv://username:password@cluster0.xxxxx.mongodb.net/
+
 
 Project 1 (Student Portal App)
 mongoose.connect(
